@@ -19,7 +19,7 @@ public void setup ()
     for (int j = 0; j < NUM_COLS; j++)
       buttons[i][j] = new MSButton(i, j);
 
-  for (int a = 0; a < 100; a++)
+  for (int a = 0; a < 10000; a++)
     setMines();
 }
 public void setMines()
@@ -36,7 +36,6 @@ public void draw ()
     displayWinningMessage();
     end = true;
   }
-  System.out.println(a);
 }
 
 public boolean isWon()
@@ -109,17 +108,18 @@ public class MSButton
   {
     a++;
     if(end == false){
-      if(mouseButton == LEFT)
+      if(mouseButton == LEFT){
       clicked = true;
         if (a == 1 && buttons[myRow][myCol].clicked == true) {
-          setLabel("");
-          if (countMines(myRow, myCol) > 0)
-            for (int i = myRow-1; i <= myRow+1; i++)
-              for (int j = myCol-1; j <= myCol+1; j++)
-                if (isValid(i, j) && mines.contains(buttons[i][j])) {
-                  mines.remove(buttons[i][j]);
-                  buttons[i][j].mousePressed();
-                }      
+          for (int i = myRow-2; i <= myRow+2; i++){
+            for (int j = myCol-2; j <= myCol+2; j++){
+              if (isValid(i, j) && mines.contains(buttons[i][j])) {
+                mines.remove(buttons[i][j]);
+                buttons[i][j].mousePressed();
+              }
+            }
+          }
+        }
       }
       if (mouseButton == RIGHT) {
         a--;
@@ -128,20 +128,9 @@ public class MSButton
         else
           flagged = false;
       } else if (mines.contains(this)) {
-        if (a == 1) {
-          mines.remove(this);
-          if (countMines(myRow, myCol) > 0)
-            for (int i = myRow-1; i <= myRow+1; i++)
-              for (int j = myCol-1; j <= myCol+1; j++)
-                if (isValid(i, j) && mines.contains(buttons[i][j])) {
-                  mines.remove(buttons[i][j]);
-                  buttons[i][j].mousePressed();
-                }
-        } else {
         displayLosingMessage();
         end = true;
-        }
-      } else if (countMines(myRow, myCol) > 0) {
+      } else if(countMines(myRow, myCol) > 0){
         setLabel(countMines(myRow, myCol));
       } else {
         for (int i = myRow-1; i <= myRow+1; i++)
