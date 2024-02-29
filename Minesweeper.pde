@@ -32,8 +32,10 @@ public void setMines()
 public void draw ()
 {
   background( 0 );
-  if (isWon() == true)
+  if (isWon() == true){
     displayWinningMessage();
+    end = true;
+  }
   System.out.println(a);
 }
 
@@ -55,7 +57,6 @@ public boolean isWon()
 }
 public void displayLosingMessage()
 {
-  end = true;
   buttons[NUM_ROWS/2-1][NUM_COLS/2-1].setLabel("L");
   for (int i = 0; i < mines.size(); i++)
     if (mines.get(i).clicked == false)
@@ -63,7 +64,6 @@ public void displayLosingMessage()
 }
 public void displayWinningMessage()
 {
-  end = true;
   buttons[NUM_ROWS/2-1][NUM_COLS/2-1].setLabel("W");
 }
 public boolean isValid(int r, int c)
@@ -107,18 +107,19 @@ public class MSButton
   // called by manager
   public void mousePressed () 
   {
+    a++;
     if(end == false){
       if(mouseButton == LEFT)
-        clicked = true;
-      a++;
-      if (a == 1 && buttons[myRow][myCol].clicked == true) {
-        if (countMines(myRow, myCol) > 0)
-          for (int i = myRow-1; i <= myRow+1; i++)
-            for (int j = myCol-1; j <= myCol+1; j++)
-              if (isValid(i, j) && mines.contains(buttons[i][j])) {
-                mines.remove(buttons[i][j]);
-                buttons[i][j].mousePressed();
-              }
+      clicked = true;
+        if (a == 1 && buttons[myRow][myCol].clicked == true) {
+          setLabel("");
+          if (countMines(myRow, myCol) > 0)
+            for (int i = myRow-1; i <= myRow+1; i++)
+              for (int j = myCol-1; j <= myCol+1; j++)
+                if (isValid(i, j) && mines.contains(buttons[i][j])) {
+                  mines.remove(buttons[i][j]);
+                  buttons[i][j].mousePressed();
+                }      
       }
       if (mouseButton == RIGHT) {
         a--;
@@ -136,8 +137,10 @@ public class MSButton
                   mines.remove(buttons[i][j]);
                   buttons[i][j].mousePressed();
                 }
-        } else 
+        } else {
         displayLosingMessage();
+        end = true;
+        }
       } else if (countMines(myRow, myCol) > 0) {
         setLabel(countMines(myRow, myCol));
       } else {
@@ -145,7 +148,7 @@ public class MSButton
           for (int j = myCol-1; j <= myCol+1; j++)
             if (isValid(i, j) && buttons[i][j].clicked == false)
               buttons[i][j].mousePressed();
-      } 
+      }
     }
   }
   public void draw () 
