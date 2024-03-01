@@ -56,14 +56,36 @@ public boolean isWon()
 }
 public void displayLosingMessage()
 {
-  buttons[NUM_ROWS/2-1][NUM_COLS/2-1].setLabel("L");
+  buttons[NUM_ROWS/2-1][NUM_COLS/2-4].setLabel("K");
+  buttons[NUM_ROWS/2-1][NUM_COLS/2-3].setLabel("A");
+  buttons[NUM_ROWS/2-1][NUM_COLS/2-2].setLabel("-");
+  buttons[NUM_ROWS/2-1][NUM_COLS/2-1].setLabel("B");
+  buttons[NUM_ROWS/2-1][NUM_COLS/2].setLabel("O");
+  buttons[NUM_ROWS/2-1][NUM_COLS/2+1].setLabel("O");
+  buttons[NUM_ROWS/2-1][NUM_COLS/2+2].setLabel("M");
+  buttons[NUM_ROWS/2-1][NUM_COLS/2+3].setLabel("!");
   for (int i = 0; i < mines.size(); i++)
     if (mines.get(i).clicked == false)
       mines.get(i).mousePressed();
 }
 public void displayWinningMessage()
 {
-  buttons[NUM_ROWS/2-1][NUM_COLS/2-1].setLabel("W");
+  buttons[NUM_ROWS/2-1][NUM_COLS/2-8].setLabel("G");
+  buttons[NUM_ROWS/2-1][NUM_COLS/2-7].setLabel("O");
+  buttons[NUM_ROWS/2-1][NUM_COLS/2-6].setLabel("O");
+  buttons[NUM_ROWS/2-1][NUM_COLS/2-5].setLabel("D");
+  buttons[NUM_ROWS/2-1][NUM_COLS/2-4].setLabel("");
+  buttons[NUM_ROWS/2-1][NUM_COLS/2-3].setLabel("J");
+  buttons[NUM_ROWS/2-1][NUM_COLS/2-2].setLabel("O");
+  buttons[NUM_ROWS/2-1][NUM_COLS/2-1].setLabel("B");
+  buttons[NUM_ROWS/2-1][NUM_COLS/2].setLabel("");
+  buttons[NUM_ROWS/2-1][NUM_COLS/2+1].setLabel("P");
+  buttons[NUM_ROWS/2-1][NUM_COLS/2+2].setLabel("A");
+  buttons[NUM_ROWS/2-1][NUM_COLS/2+3].setLabel("R");
+  buttons[NUM_ROWS/2-1][NUM_COLS/2+4].setLabel("T");
+  buttons[NUM_ROWS/2-1][NUM_COLS/2+5].setLabel("N");
+  buttons[NUM_ROWS/2-1][NUM_COLS/2+6].setLabel("E");
+  buttons[NUM_ROWS/2-1][NUM_COLS/2+7].setLabel("R");
 }
 public boolean isValid(int r, int c)
 {
