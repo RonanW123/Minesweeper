@@ -19,7 +19,7 @@ public void setup ()
     for (int j = 0; j < NUM_COLS; j++)
       buttons[i][j] = new MSButton(i, j);
 
-  for (int a = 0; a < 10000; a++)
+  for (int a = 0; a < 100; a++)
     setMines();
 }
 public void setMines()
@@ -115,13 +115,11 @@ public class MSButton
             for (int j = myCol-2; j <= myCol+2; j++){
               if (isValid(i, j) && mines.contains(buttons[i][j])) {
                 mines.remove(buttons[i][j]);
-                buttons[i][j].mousePressed();
               }
             }
           }
         }
-      }
-      if (mouseButton == RIGHT) {
+      } if (mouseButton == RIGHT) {
         a--;
         if (flagged == false)
           flagged = true;
